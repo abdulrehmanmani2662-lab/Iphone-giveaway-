@@ -26,7 +26,7 @@ HTML_TEMPLATE = """
         .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
         .glass { background: rgba(10, 15, 24, 0.75); backdrop-filter: blur(16px); }
         
-        /* FIXED 3D ROTATING BOX (NO CLIPPING) */
+        /* 3D ROTATING BOX */
         .scene { width: 160px; height: 260px; perspective: 1000px; margin: 0 auto; }
         .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spin 12s infinite linear; }
         .cube__face { 
@@ -42,7 +42,6 @@ HTML_TEMPLATE = """
             border-radius: 8px;
         }
         
-        /* Exact mathematical scaling to prevent picture separation */
         .cube__face--front, .cube__face--back { width: 160px; height: 260px; }
         .cube__face--right, .cube__face--left { width: 40px; height: 260px; left: 60px; }
         .cube__face--top, .cube__face--bottom { width: 160px; height: 40px; top: 110px; }
@@ -148,6 +147,26 @@ HTML_TEMPLATE = """
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
+                            <label class="block text-xs text-gray-400 mb-1.5 font-medium">آئی فون کا کلر (Select Color)</label>
+                            <select id="form_color" name="color" class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm">
+                                <option value="Desert Titanium">Desert Titanium</option>
+                                <option value="Natural Titanium">Natural Titanium</option>
+                                <option value="Black Titanium">Black Titanium</option>
+                                <option value="White Titanium">White Titanium</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1.5 font-medium">سٹوریج کپیسٹی (Select Storage)</label>
+                            <select id="form_storage" name="storage" class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm">
+                                <option value="256GB">256GB</option>
+                                <option value="512GB">512GB</option>
+                                <option value="1TB">1TB</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
                             <label class="block text-xs text-gray-400 mb-1.5 font-medium">پیمنٹ کا طریقہ</label>
                             <select id="form_method" name="method" class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm">
                                 <option value="Easypaisa">Easypaisa</option>
@@ -193,18 +212,21 @@ HTML_TEMPLATE = """
             btn.disabled = true;
             btn.innerHTML = "پلیز انتظار کریں...";
             btn.classList.add('opacity-50', 'cursor-not-allowed');
-            
             respDiv.classList.add('hidden');
             
-            // فارم ڈیٹا کی ساخت
+            // سارا ڈیٹا جاوا اسکرپٹ کے ذریعے پکڑنا
             var name = document.getElementById('form_name').value;
             var phone = document.getElementById('form_phone').value;
+            var color = document.getElementById('form_color').value;
+            var storage = document.getElementById('form_storage').value;
             var method = document.getElementById('form_method').value;
             var txnid = document.getElementById('form_txnid').value;
             
             var formData = new FormData();
             formData.append('name', name);
             formData.append('phone', phone);
+            formData.append('color', color);
+            formData.append('storage', storage);
             formData.append('method', method);
             formData.append('txnid', txnid);
             
@@ -215,20 +237,17 @@ HTML_TEMPLATE = """
             .then(response => response.text())
             .then(data => {
                 if(data.includes("SUCCESS_FLAG")) {
-                    // کامیابی کی صورت میں
                     document.body.innerHTML = `
                     <div style="background-color: #030508; color: white; text-align: center; padding: 50px; font-family: sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-image: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 50%);">
                         <h1 style="color: #d4af37; font-size: 36px; margin-bottom: 10px;">🎉 رجسٹریشن مکمل ہو گئی!</h1>
-                        <p style="font-size: 18px; color: #cbd5e1;">آپ کی معلومات لکی ڈرا سسٹم میں کامیابی کے ساتھ جمع ہو چکی ہیں۔</p>
+                        <p style="font-size: 18px; color: #cbd5e1;">آپ کی معلومات اور پسندیدہ آئی فون ماڈل لکی ڈرا سسٹم میں جمع ہو چکے ہیں۔</p>
                         <p style="color: #64748b; font-size: 14px; margin-top: 5px;">فیس کی تصدیق کے بعد آپ کو آفیشل واٹس ایپ پر میسج آ جائے گا۔</p>
                         <a href="/" style="margin-top: 25px; background-color: #d4af37; color: black; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 12px; box-shadow: 0 4px 15px rgba(212,175,55,0.3);">واپس ہوم پیج پر جائیں</a>
                     </div>`;
                 } else {
-                    // خرابی کی صورت میں
                     btn.disabled = false;
                     btn.innerHTML = "رجسٹریشن مکمل کریں 🚀";
                     btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    
                     respDiv.innerHTML = "❌ " + data;
                     respDiv.className = "block text-center p-3 rounded-xl text-sm font-semibold mt-3 bg-red-500/10 text-red-400 border border-red-500/20";
                 }
@@ -237,7 +256,6 @@ HTML_TEMPLATE = """
                 btn.disabled = false;
                 btn.innerHTML = "رجسٹریشن مکمل کریں 🚀";
                 btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                
                 respDiv.innerHTML = "❌ سرور سے رابطہ نہیں ہو سکا، دوبارہ کوشش کریں۔";
                 respDiv.className = "block text-center p-3 rounded-xl text-sm font-semibold mt-3 bg-red-500/10 text-red-400 border border-red-500/20";
             });
@@ -257,6 +275,8 @@ def register():
         user_data = {
             "name": request.form.get("name"),
             "phone": request.form.get("phone"),
+            "color": request.form.get("color"),
+            "storage": request.form.get("storage"),
             "method": request.form.get("method"),
             "txnid": request.form.get("txnid")
         }
@@ -264,10 +284,8 @@ def register():
         if not all(user_data.values()):
             return "جانی! تمام معلومات درست درج کریں۔", 400
 
-        # گوگل اسکرپٹ پر بھیجنے کے لیے ڈیٹا فارمیٹ
         response = requests.post(GOOGLE_SHEET_SCRIPT_URL, data=user_data, timeout=15)
         
-        # اگر گوگل اسکرپٹ 'Success' واپس کرے یا کامیابی سے ڈیٹا ایڈ کر دے
         if response.status_code == 200 and "Success" in response.text:
             return "SUCCESS_FLAG"
         else:
