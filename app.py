@@ -4,8 +4,8 @@ from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
-# ⚠️ یہاں اپنی گوگل ایپ اسکرپٹ (Google Apps Script) کا URL ڈالیں
-GOOGLE_SHEET_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"
+# ✅ جانی، آپ کا لائیو گوگل اسکرپٹ یو آر ایل یہاں سیٹ ہو گیا ہے
+GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8tiCKXHAWsYq60qyG5WjYmdVUdsyHr33BbkiYqP44rsWEF2GEZfPqf86vILzT48s8/exec"
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
@@ -212,6 +212,7 @@ def register():
         if not all(user_data.values()):
             return "جانی! تمام معلومات درست درج کریں۔", 400
 
+        # آپ کی گوگل شیٹ پر ڈیٹا پوسٹ ہو رہا ہے
         response = requests.post(GOOGLE_SHEET_SCRIPT_URL, data=user_data, timeout=10)
         
         if response.status_code == 200:
