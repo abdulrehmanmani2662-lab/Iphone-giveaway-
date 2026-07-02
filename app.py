@@ -26,8 +26,8 @@ HTML_TEMPLATE = """
         .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.2; }
         .glass { background: rgba(10, 15, 24, 0.75); backdrop-filter: blur(16px); }
         
-        /* 3D ROTATING BOX WITH IMAGE & TEXT */
-        .scene { width: 150px; height: 230px; perspective: 800px; margin: 0 auto; }
+        /* 3D ROTATING BOX WITH REAL PREMIUM IMAGE */
+        .scene { width: 150px; height: 240px; perspective: 800px; margin: 0 auto; }
         .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spin 10s infinite linear; }
         .cube__face { 
             position: absolute; 
@@ -37,22 +37,22 @@ HTML_TEMPLATE = """
             flex-direction: column;
             align-items: center; 
             justify-content: center; 
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
             overflow: hidden;
         }
         
-        .cube__face--front, .cube__face--back { width: 150px; height: 230px; }
-        .cube__face--right, .cube__face--left { width: 45px; height: 230px; left: 52px; }
-        .cube__face--top, .cube__face--bottom { width: 150px; height: 45px; top: 92px; }
+        .cube__face--front, .cube__face--back { width: 150px; height: 240px; }
+        .cube__face--right, .cube__face--left { width: 45px; height: 240px; left: 52px; }
+        .cube__face--top, .cube__face--bottom { width: 150px; height: 45px; top: 97px; }
         
         .cube__face--front  { transform: rotateY(0deg) translateZ(22px); }
         .cube__face--back   { transform: rotateY(180deg) translateZ(22px); }
         .cube__face--right  { transform: rotateY(90deg) translateZ(75px); }
         .cube__face--left   { transform: rotateY(-90deg) translateZ(75px); }
-        .cube__face--top    { transform: rotateX(90deg) translateZ(115px); }
-        .cube__face--bottom { transform: rotateX(-90deg) translateZ(115px); }
+        .cube__face--top    { transform: rotateX(90deg) translateZ(120px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(120px); }
         
-        @keyframes spin { from { transform: rotateX(-12deg) rotateY(0deg); } to { transform: rotateX(-12deg) rotateY(360deg); } }
+        @keyframes spin { from { transform: rotateX(-10deg) rotateY(0deg); } to { transform: rotateX(-10deg) rotateY(360deg); } }
     </style>
 </head>
 <body class="text-gray-200 min-h-screen flex flex-col justify-between">
@@ -88,23 +88,18 @@ HTML_TEMPLATE = """
             <div class="glass p-6 rounded-2xl border border-gray-800 text-center shadow-2xl">
                 <div class="scene mb-4">
                     <div class="cube">
-                        <div class="cube__face cube__face--front p-2 justify-between bg-black">
-                            <span class="text-[11px] text-amber-400 font-bold tracking-tight">iPhone 17 Pro</span>
-                            <div class="w-full h-32 flex items-center justify-center bg-zinc-950 rounded-lg border border-zinc-900 my-1">
-                                <svg class="w-16 h-16 text-zinc-500 fill-current" viewBox="0 0 16 16">
-                                    <path d="M11 1H5a1 1 0 0 0-1 1 v12a1 1 0 0 0 1 1 h6a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM5 0h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
-                                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                </svg>
-                            </div>
-                            <span class="text-[10px] text-amber-500 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">OFFICIAL BOX</span>
+                        <div class="cube__face cube__face--front justify-between bg-black relative">
+                            <span class="text-[11px] text-amber-400 font-bold tracking-tight mt-1.5 z-10">iPhone 17 Pro Max</span>
+                            <div class="absolute inset-0 w-full h-full opacity-80 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80');"></div>
+                            <span class="text-[10px] text-black font-extrabold bg-amber-400 px-3 py-0.5 rounded shadow-md mb-2 z-10">OFFICIAL PREMIUM</span>
                         </div>
                         <div class="cube__face cube__face--back bg-zinc-950 p-2 justify-between">
-                            <div class="text-amber-400 text-xl font-bold"></div>
-                            <span class="text-xs text-zinc-400 font-mono">17 Pro Max Vibe</span>
-                            <span class="text-[11px] text-emerald-400 font-bold">1000 PCS</span>
+                            <div class="text-amber-400 text-3xl font-bold drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]"></div>
+                            <span class="text-[10px] text-zinc-400 font-mono">Titanium Design</span>
+                            <span class="text-[11px] text-emerald-400 font-bold">1000 PCS LIVE</span>
                         </div>
-                        <div class="cube__face cube__face--right bg-zinc-900 text-[9px] text-zinc-400 font-mono font-bold uppercase tracking-widest rotate-90">iPhone 17</div>
-                        <div class="cube__face cube__face--left bg-zinc-900 text-[9px] text-zinc-400 font-mono font-bold uppercase tracking-widest -rotate-90">iPhone 17</div>
+                        <div class="cube__face cube__face--right bg-zinc-900 text-[9px] text-zinc-400 font-mono font-bold uppercase tracking-widest rotate-90">iPhone 17 Pro</div>
+                        <div class="cube__face cube__face--left bg-zinc-900 text-[9px] text-zinc-400 font-mono font-bold uppercase tracking-widest -rotate-90">iPhone 17 Pro</div>
                         <div class="cube__face cube__face--top bg-zinc-950 text-amber-400 text-xs"></div>
                         <div class="cube__face cube__face--bottom bg-zinc-950 text-amber-400 text-xs"></div>
                     </div>
@@ -112,54 +107,74 @@ HTML_TEMPLATE = """
                 <p class="text-xs text-amber-400 font-mono tracking-widest mt-2">✨ iPHONE 17 PRO 3D PREVIEW ✨</p>
             </div>
 
-            <div class="glass p-6 rounded-2xl border border-gray-800 space-y-4">
-                <h3 class="text-lg font-bold text-amber-400 border-b border-gray-800 pb-2">📌 طریقہ کار</h3>
+            <div class="glass p-6 rounded-2xl border-2 border-amber-500/30 space-y-4 shadow-xl">
+                <h3 class="text-lg font-bold text-amber-400 border-b border-gray-800 pb-2">📌 فیس جمع کروانے کا طریقہ</h3>
                 <ul class="space-y-3 text-sm text-gray-300">
-                    <li>🔹 ایزی پیسہ یا جاز کیش اکاؤنٹ پر <strong>500 روپے</strong> فیس بھیجیں۔</li>
-                    <li>🔹 فیس بھیجنے کے بعد ٹرانزیکشن آئی ڈی (Txn ID) فارم میں درج کریں۔</li>
+                    <li>🔹 نیچے دیے گئے نمبر پر اکاؤنٹ چیک کر کے <strong>500 روپے</strong> فیس بھیجیں۔</li>
+                    <li>🔹 فیس بھیجنے کے بعد ملنے والی ٹرانزیکشن آئی ڈی (Txn ID) فارم میں درج کریں۔</li>
                 </ul>
-            </div>
-            
-            <div class="hidden lg:block bg-amber-500/5 border border-dashed border-gray-800 rounded-xl p-6 text-center text-xs text-gray-600">
-                📢 ADVERTISEMENT (SIDE BAR AD)
+                
+                <div class="bg-black/60 p-4 rounded-xl border border-gray-800 font-mono space-y-3 text-right text-xs">
+                    <div class="border-b border-gray-900 pb-2">
+                        <span class="text-amber-500 font-bold">💵 EASYPAISA DETAILS:</span>
+                        <div class="flex justify-between mt-1"><span class="text-gray-400">Number:</span> <span class="text-white font-bold tracking-wider">03256286027</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Name:</span> <span class="text-gray-300">Muhammad Nadeem</span></div>
+                    </div>
+                    <div>
+                        <span class="text-red-400 font-bold">📱 JAZZCASH DETAILS:</span>
+                        <div class="flex justify-between mt-1"><span class="text-gray-400">Number:</span> <span class="text-white font-bold tracking-wider">03256286027</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Name:</span> <span class="text-gray-300">Muhammad Nadeem</span></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="lg:col-span-7 bg-gradient-to-b from-slate-950 to-black p-6 md:p-8 rounded-2xl border border-amber-500/10 shadow-2xl">
-            <h3 class="text-2xl font-bold text-white mb-6 text-center tracking-wide">آفیشل رجسٹریشن فارم</h3>
-            
-            <form id="iphoneForm" action="/register" method="POST" class="space-y-5">
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1.5 font-medium">پورا نام (Full Name)</label>
-                    <input type="text" name="name" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm transition-colors" placeholder="Ali Khan">
-                </div>
-
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1.5 font-medium">موبائل نمبر (WhatsApp Number)</label>
-                    <input type="tel" name="phone" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white text-left focus:outline-none focus:border-amber-500 font-mono text-sm transition-colors" placeholder="03001234567" dir="ltr">
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="lg:col-span-7 bg-gradient-to-b from-slate-950 to-black p-6 md:p-8 rounded-2xl border border-amber-500/10 shadow-2xl flex flex-col justify-between h-full">
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-6 text-center tracking-wide">آفیشل رجسٹریشن فارم</h3>
+                
+                <form id="iphoneForm" action="/register" method="POST" class="space-y-5">
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1.5 font-medium">پیمنٹ کا طریقہ</label>
-                        <select name="method" class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm">
-                            <option>Easypaisa</option>
-                            <option>JazzCash</option>
-                        </select>
+                        <label class="block text-xs text-gray-400 mb-1.5 font-medium">پورا نام (Full Name)</label>
+                        <input type="text" name="name" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm transition-colors" placeholder="Ali Khan">
                     </div>
+
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1.5 font-medium">ٹرانزیکشن آئی ڈی (Txn ID)</label>
-                        <input type="text" name="txnid" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white text-left focus:outline-none focus:border-amber-500 font-mono text-sm transition-colors" placeholder="Code" dir="ltr">
+                        <label class="block text-xs text-gray-400 mb-1.5 font-medium">موبائل نمبر (WhatsApp Number)</label>
+                        <input type="tel" name="phone" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white text-left focus:outline-none focus:border-amber-500 font-mono text-sm transition-colors" placeholder="03001234567" dir="ltr">
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1.5 font-medium">پیمنٹ کا طریقہ</label>
+                            <select name="method" class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm">
+                                <option>Easypaisa</option>
+                                <option>JazzCash</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1.5 font-medium">ٹرانزیکشن آئی ڈی (Txn ID)</label>
+                            <input type="text" name="txnid" required class="w-full bg-[#0d131f] border border-gray-800 rounded-xl px-4 py-3.5 text-white text-left focus:outline-none focus:border-amber-500 font-mono text-sm transition-colors" placeholder="Code" dir="ltr">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-black font-extrabold py-4 rounded-xl transition-all shadow-[0_4px_20px_rgba(212,175,55,0.3)] text-sm mt-3 uppercase tracking-wider">
+                        رجسٹریشن مکمل کریں 🚀
+                    </button>
+                </form>
+            </div>
+
+            <div class="mt-8 border-t border-gray-900 pt-6">
+                <div class="glass p-4 rounded-xl border border-emerald-500/20 text-center">
+                    <p class="text-xs text-gray-400 mb-3">اگر فارم جمع کرنے یا فیس بھیجنے میں کوئی مشکل آ رہی ہے تو بلا جھجھک ہمارے واٹس ایپ سپورٹ پر رابطہ کریں:</p>
+                    <a href="https://wa.me/60143153573" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs tracking-wide transition-all shadow-lg">
+                        💬 آفیشل واٹس ایپ ہیلپ لائن (رابطہ کریں)
+                    </a>
                 </div>
-
-                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-black font-extrabold py-4 rounded-xl transition-all shadow-[0_4px_20px_rgba(212,175,55,0.3)] text-sm mt-3 uppercase tracking-wider">
-                    رجسٹریشن مکمل کریں 🚀
-                </button>
-            </form>
-
-            <div class="mt-6 bg-amber-500/5 border border-dashed border-gray-800 rounded-xl p-4 text-center text-xs text-gray-600">
-                📢 ADVERTISEMENT (BOTTOM AD)
+                
+                <div class="mt-4 bg-amber-500/5 border border-dashed border-gray-800 rounded-xl p-3 text-center text-[10px] text-gray-600">
+                    📢 ADVERTISEMENT (BOTTOM AD)
+                </div>
             </div>
         </div>
     </main>
